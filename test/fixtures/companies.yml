@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  stock_code: 1
+  name: MyString
+  market_id: 1
+  industry_id: 1
+
+two:
+  stock_code: 1
+  name: MyString
+  market_id: 1
+  industry_id: 1
