@@ -8,32 +8,38 @@ class CompaniesController < ApplicationController
     @companies = Company.page(params[:page]).per(PER)
   end
 
+  def search
+    @companies = searchCompany(params[:market][:id], params[:industry][:id], params[:company][:name])
+
+    # binding.pry
+  end
+
   def show
     @company = Company.find_by(id: params[:id])
     @url = "https://stocks.finance.yahoo.co.jp/stocks/detail/?code=#{@company.stock_code}"
 
     ### Yahooファイナンスページをスクレイピング
     @res = parseHtml@url
+
+    # binding.pry
   end
 
 
   private
-  def getHtml(url)
+  def parseHtml(url)
+    ## html取得
     charset = nil
     html = open(url) do |f|
       charset = f.charset # 文字種別を取得
       f.read # htmlを読み込んで変数htmlに渡す
     end
-    Nokogiri::HTML.parse(html, charset).css('div#main')
-  end
-
-  def parseHtml(url)
-
-    doc = getHtml url
+    doc = Nokogiri::HTML.parse(html, charset).css('div#main')
 
     res = Hash.new
+
+    ## スクレイピング
     stock_info = doc.css('div#stockinf > div.stocksDtl > div.forAddPortfolio')
-    stock_detail = doc.css('div#detail > div.innerDate > div.lineFi')
+    stock_detail = doc.at_css('div.chartFinance').css('div.innerDate > div.lineFi')
 
     res[:genre] = stock_info.css('dl > dd.category > a').inner_text # 業種
     res[:time] = stock_info.css('dl > dd.real > span').inner_text # リアルタイム計測の時間
@@ -61,5 +67,42 @@ class CompaniesController < ApplicationController
     # 値幅制限
     res[:price_limit] = stock_detail[6].css('dl > dd > strong').inner_text
     res[:price_limit_date] = stock_detail[6].css('dl > dd > span.date').inner_text
+
+    res
   end
+
+  # searchページの検索条件を指定（ゴリ押し）
+  def searchCompany(market_id, industry_id, company_name)
+    if market_id != ''
+      if industry_id != ''
+        if company_name != ''
+          return Company.where(market_id: market_id).where(industry_id: industry_id).where('name like ?', "%#{company_name}%").page(params[:page]).per(PER)
+        else
+          return Company.where(market_id: market_id).where(industry_id: industry_id).page(params[:page]).per(PER)
+        end
+      else
+        if company_name != ''
+          return Company.where(market_id: market_id).where('name like ?', "%#{company_name}%").page(params[:page]).per(PER)
+        else
+          return Company.where(market_id: market_id).page(params[:page]).per(PER)
+        end
+      end
+    else
+      if industry_id != ''
+        if company_name != ''
+          return Company.where(industry_id: industry_id).where('name like ?', "%#{company_name}%").page(params[:page]).per(PER)
+        else
+          return Company.where(industry_id: industry_id).page(params[:page]).per(PER)
+        end
+      else
+        if company_name != ''
+          return Company.where('name like ?', "%#{company_name}%").page(params[:page]).per(PER)
+        else
+          return Company.page(params[:page]).per(PER)
+        end
+      end
+    end
+  end
+
+
 end
