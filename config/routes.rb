@@ -1,8 +1,4 @@
 Rails.application.routes.draw do
-  get 'stocks/show'
-
-  get 'stocks/new'
-
   get 'companies/search' => 'companies#search'
   post 'companies/search' =>  'companies#search'
 
