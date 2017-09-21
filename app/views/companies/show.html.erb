@@ -1,3 +1,5 @@
+<%= link_to '戻る', companies_path %>
+
 <h1><%= link_to(@company.name, @url)  %></h1>
 <p><%= @company.stock_code %></p><p><%= @res[:genre] %></p>
 
@@ -41,3 +43,7 @@
     <td><%= @res[:price_limit_date] %></td>
   </tr>
 </table>
+
+<% if session[:user_id] %>
+    <%= link_to '持ち株を登録する', stocks_new_path(company_id: @company.stock_code) %>
+<% end %>

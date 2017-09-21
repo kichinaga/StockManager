@@ -11,12 +11,12 @@
   </tr>
 
   <% @companies.each do |company| %>
-  <tr>
-    <td><%= company.stock_code %></td>
-    <td><%= link_to(company.name, company_path(company.id)) %></td>
-    <td><%= company.market.name %></td>
-    <td><%= company.industry.name %></td>
-  </tr>
+      <tr>
+        <td><%= company.stock_code %></td>
+        <td><%= link_to(company.name, company_path(company.id)) %></td>
+        <td><%= company.market.name %></td>
+        <td><%= company.industry.name %></td>
+      </tr>
   <% end %>
 
   <%= paginate @companies %>
