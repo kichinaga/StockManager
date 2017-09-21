@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   def is_user_logged
    unless session[:user_id]
      flash[:notice] = "ログインしてください"
-     redirect_to login_path
+     redirect_to sessions_login_url
    end
   end
 end

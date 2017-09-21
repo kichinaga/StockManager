@@ -20,11 +20,11 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
 
-    if user.save
+    if @user.save
       ## 成功した時
       flash[:notice] = '登録が完了しました'
       ## ログインも同時に行う
-      session[:user_id] = user.id
+      session[:user_id] = @user.id
       redirect_to action: :index
     else
       ## 失敗した時
