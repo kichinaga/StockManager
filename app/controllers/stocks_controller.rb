@@ -1,5 +1,5 @@
 class StocksController < ApplicationController
-  # before_action :is_logined
+  before_action :is_user_logged
 
   def show
 
