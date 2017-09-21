@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170901050108) do
+ActiveRecord::Schema.define(version: 20170920235808) do
 
   create_table "companies", force: :cascade do |t|
     t.integer "stock_code"
@@ -19,6 +19,8 @@ ActiveRecord::Schema.define(version: 20170901050108) do
     t.integer "industry_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["industry_id"], name: "index_companies_on_industry_id"
+    t.index ["market_id"], name: "index_companies_on_market_id"
   end
 
   create_table "industries", force: :cascade do |t|
@@ -29,6 +31,25 @@ ActiveRecord::Schema.define(version: 20170901050108) do
 
   create_table "markets", force: :cascade do |t|
     t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "stocks", force: :cascade do |t|
+    t.integer "num"
+    t.integer "first_price"
+    t.integer "user_id"
+    t.integer "company_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_stocks_on_company_id"
+    t.index ["user_id"], name: "index_stocks_on_user_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "name"
+    t.string "email"
+    t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

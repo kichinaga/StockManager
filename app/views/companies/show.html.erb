@@ -43,3 +43,7 @@
     <td><%= @res[:price_limit_date] %></td>
   </tr>
 </table>
+
+<% if session[:user_id] %>
+    <%= link_to '持ち株を登録する', stocks_new_path(company_id: @company.stock_code) %>
+<% end %>
