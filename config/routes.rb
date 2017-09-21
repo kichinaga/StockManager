@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  
+
+  root 'main#home'
+
   get 'sessions/login' => 'sessions#login_form'
   post 'sessions/login'
   post 'sessions/logout'
