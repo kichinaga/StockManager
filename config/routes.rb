@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  
+  get 'sessions/login' => 'sessions#login_form'
+  post 'sessions/login'
+  post 'sessions/logout'
+  
   get 'companies/search' => 'companies#search'
   post 'companies/search' =>  'companies#search'
 
