@@ -5,7 +5,7 @@
         <li> <%= link_to '新規登録', new_user_path %> </li>
     <% else %>
         <li> <%= link_to 'マイページ', users_path %> </li>
-        <li> <%= link_to 'ログアウト', sessions_logout_path %> </li>
+        <li> <%= link_to 'ログアウト', sessions_logout_path, method: :post %> </li>
     <% end %>
   </ul>
 </div>
