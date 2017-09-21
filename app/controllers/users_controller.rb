@@ -4,11 +4,12 @@ class UsersController < ApplicationController
 
   def index
     ## ログインしているIDから現在保持している株一覧を取得
-    # @stocks = User.find_by(id: session[:user_id]).stocks
+    # @user = User.find_by(id: session[:user_id])
   end
 
   def show
     ## ユーザーの詳細情報を表示、editやdestroyへ飛ばすボタンを作る
+    # @user = User.find_by(id: session[:user_id])
   end
 
   def new
@@ -32,10 +33,17 @@ class UsersController < ApplicationController
   end
 
   def edit
-
+    # @user = User.find_by(id: session[:user_id])
   end
 
   def update
+    # @user = User.find_by(id: session[:user_id])
+
+    # if @user.update(user_params)
+    #   redirect_to action: :show, id: @user.id
+    # else
+    #   render action: :edit
+    # end
   end
 
   def destroy
@@ -43,6 +51,6 @@ class UsersController < ApplicationController
 
   private
   def user_params
-    params.require(:user).permit(:email, :password, :password_confirmation)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation)
   end
 end
