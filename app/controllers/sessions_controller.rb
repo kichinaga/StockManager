@@ -17,7 +17,7 @@ class SessionsController < ApplicationController
   end
 
   def logout
-    session[:user_id] = nil
-    redirect_to sessions_login_url
+    log_out if logged_in?
+    redirect_to login_url
   end
 end

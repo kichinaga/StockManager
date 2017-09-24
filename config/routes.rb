@@ -1,13 +1,12 @@
 Rails.application.routes.draw do
+  root 'home#index'
 
-  root 'main#home'
-
-  get 'sessions/login' => 'sessions#login_form'
-  post 'sessions/login'
-  post 'sessions/logout'
+  get '/login', to: 'sessions#login_form'
+  post '/login', to: 'sessions#login'
+  delete '/logout', to: 'sessions#logout'
   
-  get 'companies/search' => 'companies#search'
-  post 'companies/search' =>  'companies#search'
+  # get 'companies/search', to: 'companies#search'
+  post 'companies/search', to: 'companies#search'
 
   resources :companies, only: [:index, :show]
   resources :industries, only: [:index]

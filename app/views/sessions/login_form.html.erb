@@ -1,16 +1,26 @@
 <h1>ログイン</h1>
 
-<%= form_for(:session, url: sessions_login_path) do |f| %>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for(:session, url: login_path) do |f| %>
 
-    <div class="field">
-      <%= f.text_field :email, placeholder: 'Eメール' %>
-    </div>
+        <div class="field">
+          <%= f.label 'Eメール' %>
+          <%= f.text_field :email, class: 'form-control' %>
+        </div>
 
-    <div class="field">
-      <%= f.password_field :password, placeholder: 'パスワード' %>
-    </div>
+        <div class="field">
+          <%= f.label 'パスワード' %>
+          <%= f.password_field :password, class: 'form-control' %>
+        </div>
 
-    <div class="actions">
-      <%= f.submit 'ログイン' %>
-    </div>
-<% end %>
+        <div class="actions">
+          <%= f.submit 'ログイン', class: 'btn btn-primary' %>
+        </div>
+    <% end %>
+
+    <br>
+
+    <p>新しくユーザーを作成する。 <%= link_to '新規登録', new_user_path %></p>
+  </div>
+</div>

@@ -42,6 +42,11 @@ gem 'kaminari', '~> 0.17.0'
 # pry is debug tool
 gem 'pry'
 
+# Use Bootstrap
+gem 'bootstrap-sass'
+
+# Use jQuery
+gem 'jquery-rails'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

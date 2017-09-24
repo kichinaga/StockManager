@@ -45,5 +45,5 @@
 </table>
 
 <% if session[:user_id] %>
-    <%= link_to '持ち株を登録する', stocks_new_path(company_id: @company.stock_code) %>
+    <%= link_to '持ち株を登録する', new_stock_path(company_id: @company.stock_code) %>
 <% end %>
