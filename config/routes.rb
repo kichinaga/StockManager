@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
-  root 'home/index'
+  root 'home#index'
 
   get '/login', to: 'sessions#login_form'
   post '/login', to: 'sessions#login'
-  post '/logout', to: 'sessions#logout'
+  delete '/logout', to: 'sessions#logout'
   
-  get 'companies/search', to: 'companies#search'
+  # get 'companies/search', to: 'companies#search'
   post 'companies/search', to: 'companies#search'
 
   resources :companies, only: [:index, :show]
