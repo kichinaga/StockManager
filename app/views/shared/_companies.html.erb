@@ -1,0 +1,6 @@
+<% if @companies.any? %>
+    <ol class="companies">
+      <%= render @companies %>
+    </ol>
+    <%= paginate @companies %>
+<% end %>

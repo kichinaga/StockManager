@@ -1,0 +1,6 @@
+<% if @stocks.any? %>
+    <ol class="stocks">
+      <%= render @stocks %>
+    </ol>
+    <%= paginate @stocks %>
+<% end %>

@@ -7,8 +7,8 @@ class SessionsController < ApplicationController
 
     if @user && @user.authenticate(params[:session][:password])
       flash[:notice] = 'ログインしました'
-      session[:user_id] = @user.id
-      redirect_to users_url
+      log_in @user
+      redirect_to root_url
     else
       @error_message = 'メールアドレスまたはパスワードが間違っています'
       @email = params[:email]

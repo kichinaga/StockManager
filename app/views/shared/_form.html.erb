@@ -1,3 +1,13 @@
+<% unless @search.nil? %>
+    <div class="search_info">
+      <h3>検索条件</h3>
+
+      <p>市場 : <%= Market.find(@search[:market_id]).name %></p>
+      <p>業種 : <%= Industry.find(@search[:industry_id]).name %></p>
+      <p>企業名 : <%= @search[:company_name] %></p>
+    </div>
+<% end %>
+
 <%= form_tag(:controller => :companies, :action => :search) do %>
     <div>
       <h3>会社検索</h3>
@@ -6,7 +16,7 @@
 
       <p>業種：<%= collection_select(:industry, :id, Industry.all, :id, :name, :include_blank => true) %></p>
 
-      <p>会社名：<%= text_field :company, :name %>  </p>
+      <p>企業名：<%= text_field :company, :name %>  </p>
 
       <%= submit_tag('検索') %>
 

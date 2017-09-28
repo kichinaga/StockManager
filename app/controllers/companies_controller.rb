@@ -1,17 +1,16 @@
 require 'open-uri'
 
 class CompaniesController < ApplicationController
-  ## 表示件数
-  PER = 20
 
   def index
-    @companies = Company.page(params[:page]).per(PER)
+    @companies = Company.page(params[:page])
   end
 
   def search
+    @search = { market_id: params[:market][:id], industry_id: params[:industry][:id], company_name: params[:company][:name] }
     @companies = searchCompany(params[:market][:id], params[:industry][:id], params[:company][:name])
 
-    # binding.pry
+    render action: :index
   end
 
   def show
@@ -76,29 +75,29 @@ class CompaniesController < ApplicationController
     if market_id != ''
       if industry_id != ''
         if company_name != ''
-          return Company.where(market_id: market_id).where(industry_id: industry_id).where('name like ?', "%#{company_name}%").page(params[:page]).per(PER)
+          return Company.where(market_id: market_id).where(industry_id: industry_id).where('name like ?', "%#{company_name}%").page(params[:page])
         else
-          return Company.where(market_id: market_id).where(industry_id: industry_id).page(params[:page]).per(PER)
+          return Company.where(market_id: market_id).where(industry_id: industry_id).page(params[:page])
         end
       else
         if company_name != ''
-          return Company.where(market_id: market_id).where('name like ?', "%#{company_name}%").page(params[:page]).per(PER)
+          return Company.where(market_id: market_id).where('name like ?', "%#{company_name}%").page(params[:page])
         else
-          return Company.where(market_id: market_id).page(params[:page]).per(PER)
+          return Company.where(market_id: market_id).page(params[:page])
         end
       end
     else
       if industry_id != ''
         if company_name != ''
-          return Company.where(industry_id: industry_id).where('name like ?', "%#{company_name}%").page(params[:page]).per(PER)
+          return Company.where(industry_id: industry_id).where('name like ?', "%#{company_name}%").page(params[:page])
         else
-          return Company.where(industry_id: industry_id).page(params[:page]).per(PER)
+          return Company.where(industry_id: industry_id).page(params[:page])
         end
       else
         if company_name != ''
-          return Company.where('name like ?', "%#{company_name}%").page(params[:page]).per(PER)
+          return Company.where('name like ?', "%#{company_name}%").page(params[:page])
         else
-          return Company.page(params[:page]).per(PER)
+          return Company.page(params[:page])
         end
       end
     end

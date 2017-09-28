@@ -1,23 +1,13 @@
-<h1>株式会社</h1>
+<h1>企業一覧</h1>
 
-<%= render 'shared/form' %>
+<div class="row">
+  <div class="col-md-4">
+    <%= render 'shared/form' %>
+  </div>
 
-<table>
-  <tr>
-    <th>銘柄コード</th>
-    <th>企業名</th>
-    <th>市場</th>
-    <th>業種</th>
-  </tr>
-
-  <% @companies.each do |company| %>
-  <tr>
-    <td><%= company.stock_code %></td>
-    <td><%= link_to(company.name, company_path(company.id)) %></td>
-    <td><%= company.market.name %></td>
-    <td><%= company.industry.name %></td>
-  </tr>
-  <% end %>
-
-  <%= paginate @companies %>
-</table>
+  <!-- 株一覧表示 -->
+  <div class="col-md-8">
+    <h3>企業リスト</h3>
+    <%= render 'shared/companies' %>
+  </div>
+</div>

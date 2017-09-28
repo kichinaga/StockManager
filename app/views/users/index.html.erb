@@ -2,10 +2,4 @@
 
 <h2>現在の持ち株</h2>
 
-<% @user.stocks.each do |stock| %>
-    <div class="stock_info">
-      <p>会社名： <%= stock.company.name %></p>
-      <p>保有株数： <%= stock.num %> 株</p>
-      <p>買値： <%= stock.first_price %> 円</p>
-    </div>
-<% end %>
+<%= render @user.stocks %>

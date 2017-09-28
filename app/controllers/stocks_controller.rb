@@ -7,13 +7,14 @@ class StocksController < ApplicationController
 
   def new
     @stock = Stock.new
+    @company = Company.find_by(stock_code: params[:stock_code])
   end
 
   def create
     @stock = Stock.new(stock_params)
 
     if @stock.save
-      redirect_to user_path
+      redirect_to users_url
     else
       render action: :new
     end

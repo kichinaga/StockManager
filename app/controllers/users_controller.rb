@@ -4,7 +4,7 @@ class UsersController < ApplicationController
 
   def index
     ## ログインしているIDから現在保持している株一覧を取得
-    @user = User.find_by(id: session[:user_id])
+    @user = current_user
   end
 
   def show
@@ -24,7 +24,7 @@ class UsersController < ApplicationController
       ## 成功した時
       flash[:notice] = '登録が完了しました'
       ## ログインも同時に行う
-      session[:user_id] = @user.id
+      log_in @user
       redirect_to action: :index
     else
       ## 失敗した時
