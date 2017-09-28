@@ -37,6 +37,7 @@ gem 'nokogiri'
 # This gem realize pagenation
 # Rails version 5.x.x must be kaminari version 0.17.0 ~
 gem 'kaminari', '~> 0.17.0'
+gem 'kaminari-bootstrap'
 
 # Use pry
 # pry is debug tool
