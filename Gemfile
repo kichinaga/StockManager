@@ -49,6 +49,11 @@ gem 'bootstrap-sass'
 # Use jQuery
 gem 'jquery-rails'
 
+# rest api gem
+gem 'grape'
+gem 'grape-entity'
+gem 'grape-swagger-entity'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
