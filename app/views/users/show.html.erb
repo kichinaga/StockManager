@@ -1,21 +1,15 @@
-
 <div class="row">
+
+  <!-- ユーザー情報 -->
   <aside class="col-md-4">
     <section class="user_info">
-      <h1>
-        <%= gravatar_for @user %>
-        ようこそ、<%= @user.name %>
-      </h1>
+      <%= render 'shared/user_info' %>
     </section>
   </aside>
+
+  <!-- 株一覧表示 -->
+  <div class="col-md-8">
+    <h3>持ち株情報</h3>
+    <%= render 'shared/stocks' %>
+  </div>
 </div>
-
-<h2>現在の持ち株</h2>
-
-<% @user.stocks.each do |stock| %>
-    <div class="stock_info">
-      <p>会社名： <%= stock.company.name %></p>
-      <p>保有株数： <%= stock.num %> 株</p>
-      <p>買値： <%= stock.first_price %> 円</p>
-    </div>
-<% end %>

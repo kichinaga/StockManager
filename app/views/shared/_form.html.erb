@@ -1,10 +1,10 @@
-<% unless @search.nil? %>
+<% unless @par.nil? %>
     <div class="search_info">
       <h3>検索条件</h3>
 
-      <p>市場 : <%= Market.find(@search[:market_id]).name %></p>
-      <p>業種 : <%= Industry.find(@search[:industry_id]).name %></p>
-      <p>企業名 : <%= @search[:company_name] %></p>
+      <p>市場 : <%= Market.find(@par[:market_id]).name %></p>
+      <p>業種 : <%= Industry.find(@par[:industry_id]).name %></p>
+      <p>企業名 : <%= @par[:company_name] %></p>
     </div>
 <% end %>
 
@@ -12,11 +12,11 @@
     <div>
       <h3>会社検索</h3>
 
-      <p>市場：<%= collection_select(:market, :id, Market.all, :id, :name, :include_blank => true) %> </p>
+      <p>市場：<%= collection_select(:search, :market_id, Market.all, :id, :name, :include_blank => true) %> </p>
 
-      <p>業種：<%= collection_select(:industry, :id, Industry.all, :id, :name, :include_blank => true) %></p>
+      <p>業種：<%= collection_select(:search, :industry_id, Industry.all, :id, :name, :include_blank => true) %></p>
 
-      <p>企業名：<%= text_field :company, :name %>  </p>
+      <p>企業名：<%= text_field :search, :company_name %>  </p>
 
       <%= submit_tag('検索') %>
 

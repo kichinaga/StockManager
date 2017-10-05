@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  before_action :is_user_logged, only: :destroy
+
   def login_form
   end
 

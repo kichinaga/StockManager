@@ -7,8 +7,9 @@ class CompaniesController < ApplicationController
   end
 
   def search
-    @search = { market_id: params[:market][:id], industry_id: params[:industry][:id], company_name: params[:company][:name] }
-    @companies = searchCompany(params[:market][:id], params[:industry][:id], params[:company][:name])
+    @par = search_params
+
+    @companies = searchCompany(search_params)
 
     render action: :index
   end
@@ -71,31 +72,31 @@ class CompaniesController < ApplicationController
   end
 
   # searchページの検索条件を指定（ゴリ押し）
-  def searchCompany(market_id, industry_id, company_name)
-    if market_id != ''
-      if industry_id != ''
-        if company_name != ''
-          return Company.where(market_id: market_id).where(industry_id: industry_id).where('name like ?', "%#{company_name}%").page(params[:page])
+  def searchCompany(search)
+    if search[:market_id] != ''
+      if search[:industry_id] != ''
+        if search[:company_name] != ''
+          return Company.where(market_id: search[:market_id]).where(industry_id: search[:industry_id]).where('name like ?', "%#{search[:company_name]}%").page(params[:page])
         else
-          return Company.where(market_id: market_id).where(industry_id: industry_id).page(params[:page])
+          return Company.where(market_id: search[:market_id]).where(industry_id: search[:industry_id]).page(params[:page])
         end
       else
-        if company_name != ''
-          return Company.where(market_id: market_id).where('name like ?', "%#{company_name}%").page(params[:page])
+        if search[:company_name] != ''
+          return Company.where(market_id: search[:market_id]).where('name like ?', "%#{search[:company_name]}%").page(params[:page])
         else
-          return Company.where(market_id: market_id).page(params[:page])
+          return Company.where(market_id: search[:market_id]).page(params[:page])
         end
       end
     else
-      if industry_id != ''
-        if company_name != ''
-          return Company.where(industry_id: industry_id).where('name like ?', "%#{company_name}%").page(params[:page])
+      if search[:industry_id] != ''
+        if search[:company_name] != ''
+          return Company.where(industry_id: search[:industry_id]).where('name like ?', "%#{search[:company_name]}%").page(params[:page])
         else
-          return Company.where(industry_id: industry_id).page(params[:page])
+          return Company.where(industry_id: search[:industry_id]).page(params[:page])
         end
       else
-        if company_name != ''
-          return Company.where('name like ?', "%#{company_name}%").page(params[:page])
+        if search[:company_name] != ''
+          return Company.where('name like ?', "%#{search[:company_name]}%").page(params[:page])
         else
           return Company.page(params[:page])
         end
@@ -103,5 +104,8 @@ class CompaniesController < ApplicationController
     end
   end
 
+  def search_params
+    params.require(:search).permit(:market_id, :industry_id, :company_name)
+  end
 
 end
