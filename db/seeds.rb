@@ -26,7 +26,8 @@ CSV.foreach('db/csv/industry.csv') do |row|
 end
 
 ### Company
-company = ['tosyo1.csv', 'tosyo2.csv','tosyom.csv', 'jasdaq.csv', 'other.csv']
+### 東京取引市場のみを取得する
+company = ['tosyo1.csv', 'tosyo2.csv','tosyom.csv', 'jasdaq.csv']
 company.each do |filename|
   CSV.foreach("db/csv/#{filename}") do |row|
     Company.create(stock_code: row[0],
