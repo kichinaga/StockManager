@@ -42,6 +42,15 @@
   </tr>
 </table>
 
+<ol>
+  <% get_news_list(@company.stock_code).each do |article| %>
+      <li>
+        <span><%= link_to article[:title], article[:url] %></span>
+        <span>投稿日時 : <%= article[:date] %></span>
+      </li>
+  <% end %>
+</ol>
+
 <% if session[:user_id] %>
     <br>
     <%= link_to '持ち株を登録する', new_stock_path(stock_code: @company.stock_code), class: 'btn btn-lg btn-lg btn-primary' %>
