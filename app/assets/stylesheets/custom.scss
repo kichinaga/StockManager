@@ -273,13 +273,14 @@ input {
   .num {
     display: block;
     margin-left: 60px;
-    img {
-      display: block;
-      padding: 5px 0;
-    }
   }
   .first_price {
     color: $gray-light;
+    display: block;
+    margin-left: 60px;
+  }
+  .now_price {
+    color: red;
     display: block;
     margin-left: 60px;
   }
