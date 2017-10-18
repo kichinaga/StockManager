@@ -43,5 +43,6 @@
 </table>
 
 <% if session[:user_id] %>
+    <br>
     <%= link_to '持ち株を登録する', new_stock_path(stock_code: @company.stock_code), class: 'btn btn-lg btn-lg btn-primary' %>
 <% end %>
