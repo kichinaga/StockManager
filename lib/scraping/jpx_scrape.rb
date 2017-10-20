@@ -3,7 +3,7 @@ require 'capybara/dsl'
 require 'capybara/poltergeist'
 
 module Scraping
-  class StocksScrape
+  class JPXScrape
     include Capybara::DSL
 
     attr_accessor :doc
