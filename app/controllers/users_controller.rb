@@ -1,15 +1,12 @@
 class UsersController < ApplicationController
   ###TODO ログインしているか、確認する処理を各関数の前で実行する
-  before_action :is_user_logged, only: [:index, :show, :edit, :update, :destroy]
+  before_action :is_user_logged, only: [:show, :edit, :update, :destroy]
 
-  def index
-    ## ログインしているIDから現在保持している株一覧を取得
-    @user = current_user
-  end
 
   def show
     ## ユーザーの詳細情報を表示、editやdestroyへ飛ばすボタンを作る
-    @user = User.find_by(id: session[:user_id])
+    @user = current_user
+    @stocks = current_user.stocks.page(params[:page])
   end
 
   def new
@@ -33,15 +30,15 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find_by(id: session[:user_id])
+    @user = current_user
   end
 
   def update
-    @user = User.find_by(id: session[:user_id])
+    @user = current_user
 
     if @user.update(user_params)
       flash[:notice] = '更新しました。'
-      redirect_to action: :show, id: @user.id
+      redirect_to action: :show
     else
       render action: :edit
     end

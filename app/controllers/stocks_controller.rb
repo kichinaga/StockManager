@@ -14,7 +14,7 @@ class StocksController < ApplicationController
     @stock = Stock.new(stock_params)
 
     if @stock.save
-      redirect_to users_url
+      redirect_to root_url
     else
       render action: :new
     end

@@ -4,14 +4,14 @@ Rails.application.routes.draw do
   get '/login', to: 'sessions#login_form'
   post '/login', to: 'sessions#login'
   delete '/logout', to: 'sessions#logout'
-  
-  # get 'companies/search', to: 'companies#search'
-  post 'companies/search', to: 'companies#search'
 
-  resources :companies, only: [:index, :show]
+  resources :companies , only: [:index, :show] do
+    post :search, on: :collection
+  end
+
   resources :industries, only: [:index]
   resources :markets, only: [:index]
-  resources :users
+  resource :users, except: [:index]
   resources :stocks, only: [:show, :new, :create, :edit, :update, :destroy]
 
   ## api routing
