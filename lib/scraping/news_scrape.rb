@@ -8,7 +8,7 @@ module Scraping
     CHARSET = 'utf-8'
 
     def initialize(stock_code)
-      @url = URI.escape("https://www.nikkei.com/search/site/?searchKeyword=#{stock_code}")
+      @url = "https://www.nikkei.com/search/site/?searchKeyword=#{stock_code}"
       @stock_code = stock_code
       @articles = Array.new
       open_page
@@ -30,7 +30,7 @@ module Scraping
     def self.set_capybara(url)
       Capybara.configure do |config|
         config.run_server = false
-        # config.current_driver = :poltergeist
+        config.current_driver = :poltergeist
         config.javascript_driver = :poltergeist
         config.ignore_hidden_elements = true
         config.app_host = url
