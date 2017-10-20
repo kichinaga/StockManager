@@ -2,13 +2,14 @@
     <div class="search_info">
       <h3>検索条件</h3>
 
-      <p>市場 : <%= Market.find(@par[:market_id]).name %></p>
-      <p>業種 : <%= Industry.find(@par[:industry_id]).name %></p>
+      <p>市場 : <%= Market.find(@par[:market_id]).name unless(@par[:market_id].blank?) %></p>
+      <p>業種 : <%= Industry.find(@par[:industry_id]).name unless(@par[:industry_id].blank?) %></p>
       <p>企業名 : <%= @par[:company_name] %></p>
     </div>
 <% end %>
 
-<%= form_tag(:controller => :companies, :action => :search) do %>
+<%= form_tag({ action: :search }, remote: true, id: 'form-ajax') do %>
+
     <div>
       <h3>会社検索</h3>
 

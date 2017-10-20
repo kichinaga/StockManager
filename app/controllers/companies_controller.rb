@@ -8,10 +8,7 @@ class CompaniesController < ApplicationController
 
   def search
     @par = search_params
-
     @companies = searchCompany(search_params)
-
-    render action: :index
   end
 
   def show
