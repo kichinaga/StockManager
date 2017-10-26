@@ -1,46 +1,42 @@
 <h1><%= link_to(@company.name, @url)  %></h1>
-<p><%= @company.stock_code %></p><p><%= @res[:genre] %></p>
-
-<h2>現在の価格</h2>
-<p><%= @res[:price] %>円 (<%= @res[:time] %>)</p>
+<p><%= @company.stock_code %></p><p><%= @company.industry.name %></p>
 
 <table>
   <tr>
+    <th>現在値(時刻)</th>
+    <td><%= @detail.price %></td>
+  </tr>
+  <tr>
+    <th>前日比(％)</th>
+    <td><%= @detail.change %></td>
+  </tr>
+  <tr>
     <th>前日終値</th>
-    <td><%= @res[:prev_close] %></td>
-    <td><%= @res[:prev_close_date] %></td>
+    <td><%= @detail.prev_close_price %> 円</td>
   </tr>
   <tr>
     <th>始値</th>
-    <td><%= @res[:open] %></td>
-    <td><%= @res[:open_date] %></td>
+    <td><%= @detail.open_price %> 円</td>
   </tr>
   <tr>
     <th>高値</th>
-    <td><%= @res[:high] %></td>
-    <td><%= @res[:high_date] %></td>
+    <td><%= @detail.high_price %> 円</td>
   </tr>
   <tr>
     <th>安値</th>
-    <td><%= @res[:low] %></td>
-    <td><%= @res[:low_date] %></td>
+    <td><%= @detail.low_price %> 円</td>
   </tr>
   <tr>
     <th>出来高</th>
-    <td><%= @res[:volume] %></td>
-    <td><%= @res[:volume_date] %></td>
+    <td><%= @detail.volume %></td>
   </tr>
   <tr>
-    <th>売買価格</th>
-    <td><%= @res[:total_trade] %></td>
-    <td><%= @res[:total_trade_date] %></td>
-  </tr>
-  <tr>
-    <th>値幅制限</th>
-    <td><%= @res[:price_limit] %></td>
-    <td><%= @res[:price_limit_date] %></td>
+    <th>売買代金</th>
+    <td><%= @detail.total_trade %> 円</td>
   </tr>
 </table>
+
+<br>
 
 <ol>
   <% get_news_list(@company.stock_code).each do |article| %>

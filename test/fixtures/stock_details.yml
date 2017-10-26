@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  company: one
+  price: MyString
+  change: MyString
+  prev_close_price: MyString
+  open_price: MyString
+  high_price: MyString
+  low_price: MyString
+  volume: MyString
+  total_trade: MyString
+
+two:
+  company: two
+  price: MyString
+  change: MyString
+  prev_close_price: MyString
+  open_price: MyString
+  high_price: MyString
+  low_price: MyString
+  volume: MyString
+  total_trade: MyString

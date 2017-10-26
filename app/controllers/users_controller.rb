@@ -22,7 +22,7 @@ class UsersController < ApplicationController
       flash[:notice] = '登録が完了しました'
       ## ログインも同時に行う
       log_in @user
-      redirect_to action: :index
+      redirect_to root_url
     else
       ## 失敗した時
       render action: :new

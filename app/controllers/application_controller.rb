@@ -4,9 +4,14 @@ class ApplicationController < ActionController::Base
 
   ### ログイン判定
   def is_user_logged
-   unless session[:user_id]
-     flash[:notice] = 'ログインしてください'
-     redirect_to login_url
-   end
+    if session[:user_id]
+      unless User.exists?(id: session[:user_id])
+        flash[:notice] = 'そのユーザーは存在しません'
+        redirect_to login_url
+      end
+    else
+      flash[:notice] = 'ログインしてください'
+      redirect_to login_url
+    end
   end
 end
