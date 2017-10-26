@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171026055243) do
+ActiveRecord::Schema.define(version: 20171026123311) do
 
   create_table "companies", force: :cascade do |t|
     t.integer "stock_code"
@@ -50,15 +50,22 @@ ActiveRecord::Schema.define(version: 20171026055243) do
     t.index ["company_id"], name: "index_stock_details_on_company_id"
   end
 
-  create_table "stocks", force: :cascade do |t|
-    t.integer "num"
-    t.integer "first_price"
+  create_table "stock_lists", force: :cascade do |t|
     t.integer "user_id"
     t.integer "company_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["company_id"], name: "index_stocks_on_company_id"
-    t.index ["user_id"], name: "index_stocks_on_user_id"
+    t.index ["company_id"], name: "index_stock_lists_on_company_id"
+    t.index ["user_id"], name: "index_stock_lists_on_user_id"
+  end
+
+  create_table "stocks", force: :cascade do |t|
+    t.integer "num"
+    t.integer "first_price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "stock_list_id"
+    t.index ["stock_list_id"], name: "index_stocks_on_stock_list_id"
   end
 
   create_table "users", force: :cascade do |t|
