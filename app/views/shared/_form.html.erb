@@ -1,13 +1,3 @@
-<% unless @par.nil? %>
-    <div class="search_info">
-      <h3>検索条件</h3>
-
-      <p>市場 : <%= Market.find(@par[:market_id]).name unless(@par[:market_id].blank?) %></p>
-      <p>業種 : <%= Industry.find(@par[:industry_id]).name unless(@par[:industry_id].blank?) %></p>
-      <p>企業名 : <%= @par[:company_name] %></p>
-    </div>
-<% end %>
-
 <%= form_tag({ action: :search }, remote: true, id: 'form-ajax') do %>
 
     <div>
@@ -17,7 +7,9 @@
 
       <p>業種：<%= collection_select(:search, :industry_id, Industry.all, :id, :name, :include_blank => true) %></p>
 
-      <p>企業名：<%= text_field :search, :company_name %>  </p>
+      <p>企業名：<%= text_field :search, :company_name %> </p>
+
+      <p>銘柄コード : <%= text_field :search, :stock_code %> </p>
 
       <%= submit_tag('検索') %>
 
