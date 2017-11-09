@@ -34,12 +34,21 @@ module Scraping
       doc = Nokogiri::HTML.parse(html)
       doc.css('div.m-listFormat').each do |div|
         div.css('li').each do |item|
-          @articles.push({
-                             stock_code: @stock_code,
-                             title: item.css('a').inner_text,
-                             url: "https://www.nikkei.com#{item.css('a')[0][:href]}",
-                             date: item.css('span.m-listItem_time').inner_text
-                         })
+          if item.css('span.m-listItem_text_text').inner_text == '表示できる情報はありません。'
+            @articles.push({
+                               stock_code: @stock_code,
+                               title: '表示できる情報はありません。',
+                               url: '',
+                               date: ''
+                           })
+          else
+            @articles.push({
+                               stock_code: @stock_code,
+                               title: item.css('a').inner_text,
+                               url: "https://www.nikkei.com#{item.css('a')[0][:href]}",
+                               date: item.css('span.m-listItem_time').inner_text
+                           })
+          end
         end
       end
 
