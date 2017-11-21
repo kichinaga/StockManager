@@ -14,6 +14,8 @@ class CompaniesController < ApplicationController
     @company = Company.find_by(id: params[:id])
     Scraping::JPXScrape.set_capybara
 
+    ## 企業の株情報の更新処理
+    ## 20分ごとに更新を行う
     if @company.stock_detail.nil?
       scraper = Scraping::JPXScrape.new(@company.stock_code)
       @company = set_company_stock(@company.id, scraper.get_stock_details, false)
@@ -25,12 +27,15 @@ class CompaniesController < ApplicationController
     end
 
     @detail = @company.stock_detail
+    @register_flag = is_register_company(@company.id)
 
     @url = "https://stocks.finance.yahoo.co.jp/stocks/detail/?code=#{@company.stock_code}"
+    @stock_list = StockList.new
   end
 
 
   private
+    ## 企業の現在の株価情報を新規作成、更新する関数
     def set_company_stock(id, data, flag)
       ## flag = true => 更新処理
       ##      = false => 作成処理
@@ -103,6 +108,11 @@ class CompaniesController < ApplicationController
 
     def search_params
       params.require(:search).permit(:market_id, :industry_id, :company_name, :stock_code)
+    end
+
+    ## showにて、選択した企業をユーザーが登録しているか確認する関数
+    def is_register_company(company_id)
+      User.find(session[:user_id]).stock_lists.exists?(company_id: company_id)
     end
 
 end

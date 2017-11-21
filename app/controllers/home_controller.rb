@@ -1,7 +1,7 @@
 class HomeController < ApplicationController
   def index
     if logged_in?
-      @stocks = current_user.stocks.page(params[:page])
+      @stock_lists = current_user.stock_lists.page(params[:page])
     end
   end
 end

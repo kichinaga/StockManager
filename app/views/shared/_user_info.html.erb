@@ -1,4 +1,4 @@
 <%= link_to gravatar_for(current_user, size: 50), users_path %>
 <h1><%= current_user.name %></h1>
 <span><%= link_to 'マイページ', users_path %></span>
-<span><%= current_user.stocks.count.to_s + '社登録済み'%></span>
+<span><%= @stock_lists.count.to_s + '社登録済み'%></span>

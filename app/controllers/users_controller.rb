@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   def show
     ## ユーザーの詳細情報を表示、editやdestroyへ飛ばすボタンを作る
     @user = current_user
-    @stocks = current_user.stocks.page(params[:page])
+    @stock_lists = current_user.stock_lists.page(params[:page])
   end
 
   def new
