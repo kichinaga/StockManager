@@ -6,6 +6,7 @@ class StocksController < ApplicationController
     @stock = Stock.new(stock_params)
 
     if @stock.save
+      StockList.find_by(id: @stock.stock_list.id).trade_total
       redirect_to controller: :stock_lists, action: :show, id: @stock.stock_list.id
     else
       flash[:notice] = '登録が失敗しました'
