@@ -257,6 +257,26 @@ input {
   }
 }
 
+/* stock_lists */
+.stock_lists {
+  list-style: none;
+  padding: 0;
+  li {
+    padding: 10px 0;
+    border-top: 1px solid #e8e8e8;
+  }
+  .name {
+    margin-top: 5em;
+    padding-top: 0;
+  }
+  .now_price {
+    color: $gray-light;
+    display: block;
+    margin-left: 60px;
+  }
+}
+
+
 /* stocks */
 
 .stocks {
@@ -302,5 +322,21 @@ span.picture {
   margin-top: 10px;
   input {
     border: 0;
+  }
+}
+
+.company-details {
+  list-style: none;
+  padding: 0;
+  border-top: 1px solid #e8e8e8;
+  table {
+    margin-left: 60px;
+    width: 500px;
+  }
+  span {
+    display: block;
+  }
+  .now {
+    color: red;
   }
 }

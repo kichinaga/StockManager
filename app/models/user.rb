@@ -1,5 +1,6 @@
 class User < ApplicationRecord
-  has_many :stocks, dependent: :destroy
+  # has_many :stocks, dependent: :destroy
+  has_many :stock_lists, dependent: :destroy
 
   before_save :downcase_email
 

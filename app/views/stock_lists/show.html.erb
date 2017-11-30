@@ -1,0 +1,24 @@
+<div class="row">
+
+  <!-- 値更新フォーム、株の売買を行うフォーム -->
+  <aside class="col-md-4">
+    <section class="stock_results">
+      <%= render 'stock_lists/stock_results' %>
+    </section>
+    <section class="stock_trade">
+      <%= render 'shared/stock_trade' %>
+    </section>
+  </aside>
+
+  <!-- 株一覧表示 -->
+  <div class="col-md-8">
+    <div class="stock-header">
+      <h3>会社情報</h3>
+      <%= render 'shared/company_results' %>
+    </div>
+    <div class="history">
+      <h3>購買履歴</h3>
+      <%= render 'shared/stocks' %>
+    </div>
+  </div>
+</div>

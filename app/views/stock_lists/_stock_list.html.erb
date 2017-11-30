@@ -1,0 +1,4 @@
+<li id="stock_list-<%= stock_list.id %>">
+  <span class="name">企業名 : <%= link_to stock_list.company.name, stock_list %></span>
+  <span class="now_price">現在値(時刻) :  <%= stock_list.company.stock_detail.price %></span>
+</li>

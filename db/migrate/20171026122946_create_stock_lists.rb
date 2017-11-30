@@ -1,10 +1,9 @@
-class CreateStocks < ActiveRecord::Migration[5.1]
+class CreateStockLists < ActiveRecord::Migration[5.1]
   def change
-    create_table :stocks do |t|
-      t.integer :num
-      t.integer :price
+    create_table :stock_lists do |t|
       t.references :user, foreign_key: true
       t.references :company, foreign_key: true
+      t.boolean :activated
 
       t.timestamps
     end

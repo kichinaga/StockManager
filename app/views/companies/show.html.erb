@@ -40,14 +40,33 @@
 
 <ol>
   <% get_news_list(@company.stock_code).each do |article| %>
-      <li>
-        <span><%= link_to article[:title], article[:url] %></span>
-        <span>投稿日時 : <%= article[:date] %></span>
-      </li>
+      <% if article[:url] == '' %>
+          <span>表示できるニュースはありません。</span>
+      <% else %>
+          <li>
+            <span><%= link_to article[:title], article[:url] %></span>
+            <span>投稿日時 : <%= article[:date] %></span>
+          </li>
+      <% end %>
   <% end %>
 </ol>
 
 <% if session[:user_id] %>
+    <% if @register_flag %>
+        <p>既にこの企業は登録済みです</p>
+    <% else %>
+        <%#TODO ユーザのstock_listにこの企業を登録する %>
+        <div class="stock-list-form">
+          <%= form_for @stock_list do |f| %>
+              <%= f.hidden_field :user_id, value: session[:user_id] %>
+              <%= f.hidden_field :company_id, value: @company.id %>
+
+              <%= f.submit 'この企業を登録する' %>
+          <% end %>
+
+        </div>
+    <% end %>
     <br>
-    <%= link_to '持ち株を登録する', new_stock_path(stock_code: @company.stock_code), class: 'btn btn-lg btn-lg btn-primary' %>
+
+    <%# link_to '持ち株を登録する', new_stock_path(stock_code: @company.stock_code), class: 'btn btn-lg btn-lg btn-primary' %>
 <% end %>

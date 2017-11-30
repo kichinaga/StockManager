@@ -1,38 +1,19 @@
 class StocksController < ApplicationController
   before_action :is_user_logged
 
-  def show
-
-  end
-
-  def new
-    @stock = Stock.new
-    @company = Company.find_by(stock_code: params[:stock_code])
-  end
 
   def create
     @stock = Stock.new(stock_params)
 
     if @stock.save
+      StockList.find_by(id: @stock.stock_list.id).trade_total
+      redirect_to controller: :stock_lists, action: :show, id: @stock.stock_list.id
+    else
+      flash[:notice] = '登録が失敗しました'
       redirect_to root_url
-    else
-      render action: :new
     end
   end
 
-  def edit
-    @stock = Stock.find_by(id: params[:id])
-  end
-
-  def update
-    @stock = Stock.find_by(id: params[:id])
-
-    if @stock.update(stock_params)
-      redirect_to action: :show
-    else
-      render action: :edit
-    end
-  end
 
   def destroy
 
@@ -40,6 +21,6 @@ class StocksController < ApplicationController
 
   private
   def stock_params
-    params.require(:stock).permit(:num, :first_price, :user_id, :company_id)
+    params.require(:stock).permit(:num, :price, :action, :stock_list_id)
   end
 end
