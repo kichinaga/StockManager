@@ -1,0 +1,21 @@
+<div class="company-details">
+  <h4 class="name"><%= @company.name %></h4>
+  <table>
+    <tr>
+      <th>現在値(時刻)</th><td><span class="now"><%= @company.stock_detail.price %></span></td>
+      <th>前日比</th><td><span class="change"><%= @company.stock_detail.change %></span></td>
+    </tr>
+    <tr>
+      <th>前日終値</th><td><span class="prev-close"><%= @company.stock_detail.prev_close_price %></span></td>
+      <th>始値</th><td><span class="open"><%= @company.stock_detail.open_price %></span></td>
+    </tr>
+    <tr>
+      <th>高値</th><td><span class="high"><%= @company.stock_detail.high_price %></span></td>
+      <th>安値</th><td><span class="low"><%= @company.stock_detail.low_price %></span></td>
+    </tr>
+    <tr>
+      <th>出来高</th><td><span class="volume"><%= @company.stock_detail.volume %></span></td>
+      <th>売買代金</th><td><span class="total"><%= @company.stock_detail.total_trade %></span></td>
+    </tr>
+  </table>
+</div>
