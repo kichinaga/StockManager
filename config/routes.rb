@@ -9,10 +9,11 @@ Rails.application.routes.draw do
     post :search, on: :collection
   end
 
-  resources :industries, only: [:index]
-  resources :markets, only: [:index]
-  resource :users, except: [:index]
-  resources :stocks, only: [:show, :new, :create, :edit, :update, :destroy]
+  resources :industries, only: :index
+  resources :markets, only: :index
+  resource :users, except: :index
+  resources :stocks, only: [:create, :destroy]
+  resources :stock_lists, only: [:index, :show, :create]
 
   ## api routing
   mount API::Root => '/'
